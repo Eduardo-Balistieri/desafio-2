@@ -17,6 +17,19 @@ class StoreRegistrationDao {
     )`)
   }
 
+  static update(storeRegistration, callback) {
+    const { id, name, owner, registrationDate, businessType } = storeRegistration
+    db.query(`UPDATE ${TABLE_NAME} SET
+      NAME=?,
+      OWNER=?,
+      REGISTRATION_DATE=?,
+      BUSINESS_TYPE=?
+    WHERE ID=?`,
+      [name, owner, registrationDate, businessType, id],
+      (err, result, fields) => callback(err)
+    )
+  }
+
   /*
   Eduardo
     CREATE
