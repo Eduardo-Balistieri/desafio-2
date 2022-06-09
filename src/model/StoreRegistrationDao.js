@@ -17,6 +17,35 @@ class StoreRegistrationDao {
     )`)
   }
 
+  static getBusinessTypeCount(businessType) {
+    return new Promise((resolve, reject) => db.query(
+      `SELECT COUNT(*) AS COUNT FROM ${TABLE_NAME} WHERE BUSINESS_TYPE LIKE ?`,
+      [`%${businessType}%`],
+      (err, result, fields) => {
+        if (err) {
+          reject(err)
+        }
+        else {
+          resolve(result[0]['COUNT'])
+        }
+      }
+    ))
+  }
+
+  static getByBusinessType(businessType, page, limitPerPage) {
+    return new Promise((resolve, reject) => db.query(
+      `SELECT * FROM ${TABLE_NAME} WHERE BUSINESS_TYPE LIKE ? LIMIT ? OFFSET ?`,
+      [`%${businessType}%`, limitPerPage, page * limitPerPage],
+      (err, result, fields) => {
+        if (err) {
+          reject(err)
+        }
+        else {
+          resolve(result)
+        }
+      }
+    ))
+    
   static update(storeRegistration) {
     const { id, name, owner, registrationDate, businessType } = storeRegistration
     return new Promise((resolve, reject) => {
