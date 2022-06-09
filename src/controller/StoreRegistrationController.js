@@ -11,11 +11,11 @@ class StoreRegistrationController {
       const data = await StoreRegistrationDao.getByBusinessType(businessType, page, limitPerPage)
       const response = { results: data }
       if (page > 0 && data.length > 0) {
-        response['prev'] = `http://localhost:3030/store-registration/business?type=${businessType}&page=${page - 1}`
+        response['prev'] = `http://localhost:3030/store-registration/business?type=${businessType}&page=${page - 1}&limit=${limitPerPage}`
       }
       const offset = (limitPerPage * page) + data.length
       if (offset < count) {
-        response['next'] = `http://localhost:3030/store-registration/business?type=${businessType}&page=${page + 1}`
+        response['next'] = `http://localhost:3030/store-registration/business?type=${businessType}&page=${page + 1}&limit=${limitPerPage}`
       }
       res.status(200).json(response)
     }
