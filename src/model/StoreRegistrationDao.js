@@ -45,6 +45,7 @@ class StoreRegistrationDao {
         }
       }
     ))
+  }
     
   static update(storeRegistration) {
     const { id, name, owner, registrationDate, businessType } = storeRegistration

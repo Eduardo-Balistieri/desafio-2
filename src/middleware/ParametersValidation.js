@@ -1,3 +1,5 @@
+import Validation from "../util/Validation.js"
+
 class ParametersValidation {
   static getByBusinessType(req, res, next) {
     const businessType = req.query.type
@@ -11,6 +13,9 @@ class ParametersValidation {
     }
     if (isNaN(page) || isNaN(limit) || parseInt(limit) <= 0) {
       return res.status(400).json({ message: "Invalid argument" })
+    }
+    next()
+  }
 
   static update(req, res, next) {
     const { name, owner, registrationDate, businessType } = req.body
