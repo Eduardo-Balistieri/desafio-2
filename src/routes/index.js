@@ -1,3 +1,6 @@
+import StoreRegistrationRoutes from "./StoreRegistrationRoutes.js"
 
-
-// "/update", StoreRegistrationController.update
+const useRoutes = (app) => {
+  app.use(StoreRegistrationRoutes)
+}
+export default useRoutes
