@@ -1,6 +1,6 @@
 import { Router } from "express"
-import StoreRegistrationController from "../controller/StoreRegistrationController.js"
 import ParametersValidation from "../middleware/ParametersValidation.js"
+import StoreRegistrationController from "../controller/StoreRegistrationController.js"
 
 const routes = Router()
 routes.get(
@@ -12,6 +12,11 @@ routes.put(
   "/store-registration/:id",
   ParametersValidation.update,
   StoreRegistrationController.update
+)
+routes.get(
+  "/store-registration/owner",
+  ParametersValidation.getByOwner,
+  StoreRegistrationController.getByOwner
 )
 
 export default routes
