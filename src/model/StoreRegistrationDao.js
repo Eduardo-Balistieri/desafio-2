@@ -17,17 +17,26 @@ class StoreRegistrationDao {
     )`)
   }
 
-  static update(storeRegistration, callback) {
+  static update(storeRegistration) {
     const { id, name, owner, registrationDate, businessType } = storeRegistration
-    db.query(`UPDATE ${TABLE_NAME} SET
-      NAME=?,
-      OWNER=?,
-      REGISTRATION_DATE=?,
-      BUSINESS_TYPE=?
-    WHERE ID=?`,
-      [name, owner, registrationDate, businessType, id],
-      (err, result, fields) => callback(err)
-    )
+    return new Promise((resolve, reject) => {
+      db.query(`UPDATE ${TABLE_NAME} SET
+          NAME=?,
+          OWNER=?,
+          REGISTRATION_DATE=?,
+          BUSINESS_TYPE=?
+          WHERE ID=?`,
+        [name, owner, registrationDate, businessType, id],
+        (err, result, fields) => {
+          if(err) {
+            reject(err)
+          }
+          else {
+            resolve()
+          }
+        }
+      )
+    })
   }
 
   /*
