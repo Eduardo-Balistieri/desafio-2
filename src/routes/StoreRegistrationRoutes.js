@@ -7,6 +7,10 @@ routes.get(
   "/store-registration/business",
   ParametersValidation.getByBusinessType,
   StoreRegistrationController.getByBusinessType
+routes.put(
+  "/store-registration/:id",
+  ParametersValidation.update,
+  StoreRegistrationController.update
 )
 
 export default routes

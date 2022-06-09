@@ -18,6 +18,13 @@ class StoreRegistrationController {
         response['next'] = `http://localhost:3030/store-registration/business?type=${businessType}&page=${page + 1}&limit=${limitPerPage}`
       }
       res.status(200).json(response)
+
+  static async update(req, res) {
+    try {
+      const id = req.params.id
+      const { name, owner, registrationDate, businessType } = req.body
+      await StoreRegistrationDao.update({ id, name, owner, registrationDate, businessType })
+      res.sendStatus(204)
     }
     catch (err) {
       console.log(err.message)
@@ -25,4 +32,5 @@ class StoreRegistrationController {
     }
   }
 }
+
 export default StoreRegistrationController
