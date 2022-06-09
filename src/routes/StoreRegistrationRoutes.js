@@ -4,6 +4,16 @@ import StoreRegistrationController from "../controller/StoreRegistrationControll
 
 const routes = Router()
 routes.get(
+  "/store-registration/business",
+  ParametersValidation.getByBusinessType,
+  StoreRegistrationController.getByBusinessType
+)
+routes.put(
+  "/store-registration/:id",
+  ParametersValidation.update,
+  StoreRegistrationController.update
+)
+routes.get(
   "/store-registration/owner",
   ParametersValidation.getByOwner,
   StoreRegistrationController.getByOwner
