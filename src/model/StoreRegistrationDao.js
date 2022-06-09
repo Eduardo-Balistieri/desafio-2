@@ -17,6 +17,36 @@ class StoreRegistrationDao {
     )`)
   }
 
+  static getOwnerCount(owner) {
+    return new Promise((resolve, reject) => db.query(
+      `SELECT COUNT(*) AS COUNT FROM ${TABLE_NAME} WHERE OWNER LIKE ?`,
+      [`%${owner}%`],
+      (err, result, fields) => {
+        if (err) {
+          reject(err)
+        }
+        else {
+          resolve(result[0]['COUNT'])
+        }
+      }
+    ))
+  }
+
+  static getByOwner(owner, page, limitPerPage) {
+    return new Promise((resolve, reject) => db.query(
+      `SELECT * FROM ${TABLE_NAME} WHERE OWNER LIKE ? LIMIT ? OFFSET ?`,
+      [`%${owner}%`, limitPerPage, page * limitPerPage],
+      (err, result, fields) => {
+        if (err) {
+          reject(err)
+        }
+        else {
+          resolve(result)
+        }
+      }
+    ))
+  }
+  
   /*
   Eduardo
     CREATE
