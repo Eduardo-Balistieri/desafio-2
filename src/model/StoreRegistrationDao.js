@@ -45,7 +45,8 @@ class StoreRegistrationDao {
         }
       }
     ))
-    
+  }
+
   static update(storeRegistration) {
     const { id, name, owner, registrationDate, businessType } = storeRegistration
     return new Promise((resolve, reject) => {
@@ -57,7 +58,7 @@ class StoreRegistrationDao {
           WHERE ID=?`,
         [name, owner, registrationDate, businessType, id],
         (err, result, fields) => {
-          if(err) {
+          if (err) {
             reject(err)
           }
           else {
@@ -67,6 +68,41 @@ class StoreRegistrationDao {
       )
     })
   }
+
+  static mInsert(storeRegistration, callback) {
+    const { name, owner, registrationDate, businessType } = storeRegistration
+    db.query(`INSERT INTO ${TABLE_NAME} 
+      (NAME, 
+      OWNER, 
+      REGISTRATION_DATE, 
+      BUSINESS_TYPE) VALUES (?, ?, ?, ?)`,
+      [name, owner, registrationDate, businessType],
+      (err, result, fields) => callback(err)
+    )
+  }
+
+  static mGetAll(callback) {
+    db.query(`SELECT * FROM ${TABLE_NAME}`,
+      (err, result, fields) => callback(err)
+    )
+  }
+
+  static mGet(id, callback) {
+    db.query(`SELECT * FROM ${TABLE_NAME}
+      WHERE ID=?`,
+      [id],
+      (err, result, fields) => callback(err)
+    )
+  }
+
+  static mDelete(id, callback) {
+    db.query(`DELETE FROM ${TABLE_NAME}
+      WHERE ID=?`,
+      [id],
+      (err, result, fields) => callback(err)
+    )
+  }
+
 
   /*
   Eduardo
