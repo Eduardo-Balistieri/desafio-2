@@ -7,25 +7,22 @@ routes.get(
   "/store-registration/business",
   ParametersValidation.getByBusinessType,
   StoreRegistrationController.getByBusinessType
-  )
-  routes.get(
-    "/products",  
-    StoreRegistrationController.mGetAll
-  )
-  routes.get(
-    "/product",  
-    ParametersValidation.mGet, 
-    StoreRegistrationController.mGet
-  )
-  routes.delete(
-    "/product",  
-    ParametersValidation.mGet, 
-    StoreRegistrationController.mDelete,
-  )
-  routes.post(
-    "/new",  
-    ParametersValidation.mInsert, 
-    StoreRegistrationController.mInsert,
-  )
+)
+routes.put(
+  "/store-registration/:id",
+  ParametersValidation.update,
+  StoreRegistrationController.update
+)
+routes.delete(
+  "/store-registration/product",  
+  ParametersValidation.mGet, 
+  StoreRegistrationController.mDelete,
+)
+routes.post(
+  "/store-registration/new",  
+  ParametersValidation.mInsert, 
+  StoreRegistrationController.mInsert,
+)
+
 
 export default routes

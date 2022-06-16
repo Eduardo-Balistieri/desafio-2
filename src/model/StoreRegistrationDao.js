@@ -17,6 +17,20 @@ class StoreRegistrationDao {
     )`)
   }
 
+  static getOwnerCount(owner) {
+    return new Promise((resolve, reject) => db.query(
+      `SELECT COUNT(*) AS COUNT FROM ${TABLE_NAME} WHERE OWNER LIKE ?`,
+      [`%${owner}%`],
+      (err, result, fields) => {
+        if (err) {
+          reject(err)
+        }
+        else {
+          resolve(result[0]['COUNT'])
+        }
+      }
+    ))
+  }
   static getBusinessTypeCount(businessType) {
     return new Promise((resolve, reject) => db.query(
       `SELECT COUNT(*) AS COUNT FROM ${TABLE_NAME} WHERE BUSINESS_TYPE LIKE ?`,
@@ -32,6 +46,21 @@ class StoreRegistrationDao {
     ))
   }
 
+  static getByOwner(owner, page, limitPerPage) {
+    return new Promise((resolve, reject) => db.query(
+      `SELECT * FROM ${TABLE_NAME} WHERE OWNER LIKE ? LIMIT ? OFFSET ?`,
+      [`%${owner}%`, limitPerPage, page * limitPerPage],
+      (err, result, fields) => {
+        if (err) {
+          reject(err)
+        }
+        else {
+          resolve(result)
+        }
+      }
+    ))
+  }
+      
   static getByBusinessType(businessType, page, limitPerPage) {
     return new Promise((resolve, reject) => db.query(
       `SELECT * FROM ${TABLE_NAME} WHERE BUSINESS_TYPE LIKE ? LIMIT ? OFFSET ?`,
@@ -46,7 +75,6 @@ class StoreRegistrationDao {
       }
     ))
   }
-
   static update(storeRegistration) {
     const { id, name, owner, registrationDate, businessType } = storeRegistration
     return new Promise((resolve, reject) => {
