@@ -111,7 +111,7 @@ class StoreRegistrationDao {
 
   static mGetAll(callback) {
     db.query(`SELECT * FROM ${TABLE_NAME}`,
-      (err, result, fields) => callback(err)
+      (err, result, fields) => callback(err, result)
     )
   }
 
@@ -119,7 +119,7 @@ class StoreRegistrationDao {
     db.query(`SELECT * FROM ${TABLE_NAME}
       WHERE ID=?`,
       [id],
-      (err, result, fields) => callback(err)
+      (err, result, fields) => callback(err, result)
     )
   }
 

@@ -8,6 +8,15 @@ routes.get(
   ParametersValidation.getByBusinessType,
   StoreRegistrationController.getByBusinessType
 )
+routes.get(
+  "/products",  
+  StoreRegistrationController.mGetAll
+)
+routes.get(
+  "/product",  
+  ParametersValidation.mGet, 
+  StoreRegistrationController.mGet
+)
 routes.put(
   "/store-registration/:id",
   ParametersValidation.update,

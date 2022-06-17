@@ -25,7 +25,7 @@ class StoreRegistrationController {
       res.sendStatus(500)
     }
   }
-        
+
   static async getByBusinessType(req, res) {
     try {
       const businessType = req.query.type
@@ -62,70 +62,69 @@ class StoreRegistrationController {
       res.sendStatus(500)
     }
   }
-  static mInsert(req, res) { 
-    const { name, owner, registrationDate, businessType } = req.body 
-    StoreRegistrationDao.mInsert( 
-      { name, owner, registrationDate, businessType }, 
-      (err) => { 
-        if (err) { 
-          console.log(err.message) 
-          res.sendStatus(500) 
-        } 
-        else { 
-          res.sendStatus(204) 
-        } 
-      } 
-    ) 
-  }
-   
-  static mDelete(req, res) { 
-    const id = req.query.id 
-    StoreRegistrationDao.mDelete( 
-      id, 
-      (err) => { 
-        if (err) { 
-          console.log(err.message) 
-          res.sendStatus(500) 
-        } 
-        else { 
-          res.sendStatus(204) 
-        } 
-      } 
-    ) 
-  } 
-   
-  static mGet(req, res) { 
-    const id = req.query.id 
-    StoreRegistrationDao.mGet( 
-      id, 
-      (err, result) => { 
-        if (err) { 
-          console.log(err.message) 
-          res.sendStatus(500) 
-        } 
-        else { 
-          console.log(result) 
-          res.sendStatus(204) 
-        } 
-      } 
-    ) 
-  } 
-   
-  static mGetAll(req, res) { 
-    StoreRegistrationDao.mGetAll( 
-      (err, result) => { 
-        if (err) { 
-          console.log(err.message) 
-          res.sendStatus(500) 
-        } 
-        else { 
-          console.log(result) 
-          res.sendStatus(204) 
-        } 
-      } 
+  static mInsert(req, res) {
+    const { name, owner, registrationDate, businessType } = req.body
+    StoreRegistrationDao.mInsert(
+      { name, owner, registrationDate, businessType },
+      (err) => {
+        if (err) {
+          console.log(err.message)
+          res.sendStatus(500)
+        }
+        else {
+          res.sendStatus(204)
+        }
+      }
     )
   }
-   
+
+  static mDelete(req, res) {
+    const id = req.query.id
+    StoreRegistrationDao.mDelete(
+      id,
+      (err) => {
+        if (err) {
+          console.log(err.message)
+          res.sendStatus(500)
+        }
+        else {
+          res.sendStatus(204)
+        }
+      }
+    )
   }
+
+  static mGet(req, res) {
+    const id = req.query.id
+    StoreRegistrationDao.mGet(
+      id,
+      (err, result) => {
+        if (err) {
+          console.log(err.message)
+          res.sendStatus(500)
+        }
+        else {
+          console.log(result)
+          res.status(200).json(result)
+        }
+      }
+    )
+  }
+
+  static mGetAll(req, res) {
+    StoreRegistrationDao.mGetAll(
+      (err, result) => {
+        if (err) {
+          console.log(err.message)
+          res.sendStatus(500)
+        }
+        else {
+          console.log(result)
+          res.status(200).json(result)
+        }
+      }
+    )
+  }
+}
 
 export default StoreRegistrationController
