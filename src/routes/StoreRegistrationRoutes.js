@@ -9,6 +9,16 @@ routes.get(
   StoreRegistrationController.getByBusinessType
 )
 routes.get(
+  "/store-registration/owner",
+  ParametersValidation.getByOwner,
+  StoreRegistrationController.getByOwner
+)
+routes.put(
+  "/store-registration/:id",
+  ParametersValidation.update,
+  StoreRegistrationController.update
+)
+routes.get(
   "/products",  
   StoreRegistrationController.mGetAll
 )
@@ -16,11 +26,6 @@ routes.get(
   "/product",  
   ParametersValidation.mGet, 
   StoreRegistrationController.mGet
-)
-routes.put(
-  "/store-registration/:id",
-  ParametersValidation.update,
-  StoreRegistrationController.update
 )
 routes.delete(
   "/store-registration/product",  

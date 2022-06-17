@@ -30,6 +30,7 @@ class ParametersValidation {
     if (isNaN(page) || isNaN(limit) || parseInt(limit) <= 0) {
       return res.status(400).json({ message: "Invalid argument" })
     }
+    next()
   }
 
   static update(req, res, next) {
