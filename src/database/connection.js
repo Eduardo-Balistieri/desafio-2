@@ -2,8 +2,8 @@ import mysql from "mysql"
 
 const connection = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "Root123!"
+  user: "alice",
+  password: "password!"
 })
 
 connection.connect(err => {
